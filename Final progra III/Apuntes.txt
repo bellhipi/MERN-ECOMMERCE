@@ -1,0 +1,56 @@
+https://www.youtube.com/watch?v=DqpL5UtJHus&ab_channel=Fazt minuto 22
+
+Instalar node.js
+Reiniciar la compu
+
+En la terminal del vsc:
+
+npm init --yes
+Crea pagkage.json con las configuraciones básicas
+Gracias a esto puedo empezar a instalar módulos pej: express
+
+npm install express
+crea un package-lock.json
+//npm i express --save
+//i de instalar
+//Crea una dependencia (el --save es muy importante)
+
+cannot GET / 
+Esto es un error que indica que express no pudo obtener una ruta inicial a traves del metodo get
+como no creamos ninguna ruta por defecto manda un error
+
+En el package.json tenemos una dependencia de express, a medida que instalemos cositas con el npm se van a ir agregando dependencias
+En la sección de scripts nos permite ejecutar las dependencias directamente desde un comando
+
+ "scripts": {
+    "start": "node src/index.js"
+  },
+  
+Entonces ahora uso npm start
+(esto ejecuta el script star)
+
+Entonces agrego:
+"scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  
+y hago un:
+npm install nodemon -D
+
+//npm i --save-dev standard nodemon
+//instalar una librería que te ayuda con algunas cosas
+//por ejemplo da error si tenes variables en desuso
+//nodemon sirve para que te acutalice en cada cambio
+
+//npm i dotenv --save
+//para crear una dependencia con el archivo .env
+
+Cierro y abro el .json 
+Queda así:
+
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+  
+Este tal nodemon es un módulo que me va a ayudar a reiniciar el servidor cada vez que yo haga algún cambio
