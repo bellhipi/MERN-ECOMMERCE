@@ -17,5 +17,5 @@
  // inicializa el servidor y le pedimos que la funcion  nos muestre el mnsj
  //tomamos el valor seteado en el setting
  app.listen(app.get('port'), () =>{
-    console.log("Server on port 3000");
+    console.log(`Server on port ${app.get('port')}`); //comilla de mierda ` para concatenar texto + var
  });
