@@ -1,4 +1,4 @@
-https://www.youtube.com/watch?v=DqpL5UtJHus&ab_channel=Fazt minuto 22
+https://www.youtube.com/watch?v=DqpL5UtJHus&ab_channel=Fazt minuto 45
 
 Instalar node.js
 Reiniciar la compu
@@ -56,3 +56,43 @@ Queda así:
   }
   
 Este tal nodemon es un módulo que me va a ayudar a reiniciar el servidor cada vez que yo haga algún cambio
+Para cancelarlo ctrl+C
+
+Middlewares: funciones que se ejecutan antes de que llegen a nuestras rutas
+
+npm install morgan
+
+es un modulo que me permite ver por consola las peticiones del cliente
+al ejecutar dev me figura esto en la consola:
+GET / 404 7.234 ms - 139
+esto dice que un cliente hizo una petición get
+y se respondió el error 404 porque todavia no hay nada
+7.234 ms es el tiempo que tardó en responder
+139 es el peso de la respuesta
+
+rsapi: direccion de internet a la que react va a poder hacer peticiones
+
+para usar la ruta index.html de la carpeta public
+como esa ruta esta dentro de src necesitamos rutar desde antes
+para eso usamos un modulo path
+
+
+npm install mongoose
+Este modulo nos permite conectarnos a la BD y definir como van a lucir los datos dentro de esta
+
+vamos a conectar con mongodb local
+para eso voy a escribir en consola
+mongodb
+(esto deberia funcionar si ya tengo el mongodb instalado en windows)
+sudo service mongod start
+(este es para linux)
+
+-------------------
+para conectar mongodb yo me instale la versión desktop
+también la extension mongodb for visual para el VSC
+desde el acceso directo mongodb server lo abrimos para hacer andar mongo
+y el otro acceso directo mongodb compass tiene una dirección:
+mongodb://localhost:27017
+voy al visual abro la extensión pongo new conecction y esa dirección arriba
+seguida de enter. con eso ya tengo mongodb conectado con visual
+--------------------------------------------
