@@ -35,6 +35,8 @@ Entonces agrego:
     "dev": "nodemon src/index.js"
   },
   
+  (para ejecutar en la terminal npm run dev)
+  
 y hago un:
 npm install nodemon -D
 
