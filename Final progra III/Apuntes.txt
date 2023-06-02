@@ -1,4 +1,4 @@
-https://www.youtube.com/watch?v=DqpL5UtJHus&ab_channel=Fazt minuto 45
+https://www.youtube.com/watch?v=DqpL5UtJHus&ab_channel=Fazt
 
 Instalar node.js
 Reiniciar la compu
@@ -96,3 +96,95 @@ mongodb://localhost:27017
 voy al visual abro la extensión pongo new conecction y esa dirección arriba
 seguida de enter. con eso ya tengo mongodb conectado con visual
 --------------------------------------------
+Schema sirve para definir que propiedades va a tener
+
+en el tutorial era así:
+Task.find(function (err, tasks){ ...
+pero me dio este error
+MongooseError: Model.find() no longer accepts a callback
+lo goglee y encontre esta solución
+https://www.mongodb.com/community/forums/t/any-alternative-for-modelname-find-function-in-mongoose/215543/3
+entonces decidí usar el then y funcionó:
+Task.find().then(function (err, tasks){ ...
+
+por consola sale esto:
+Server on port 3000
+db conectada
+GET /api/tasks 304 9.787 ms - -
+undefined
+
+en el tutorial le sale [] en lugar de undefined
+el chabon explica que es un arreglo vacío
+y que sale eso porque todavía no hay nada en la bd
+
+como le estamos dando un nombre de la bd pero no existe esa bd mongoose la crea por nosotros
+
+ah soy una idiota ansiosa porque el chabon explica que la manera esa de escribir la funcion es un callback y es una manera un poco antigua
+lo que se usa ahora es una forma asincronica y otra usando el then
+minuto 52
+
+Forma 1 no funciona:
+router.get('/', (req, res) => { //cuando llegue una peticion
+    //consulto a la bd
+    //el find busca los documentos (puedo obtener los errores, o los documentos)
+    //en el tutorial era así:
+    //Task.find(function (err, tasks){
+    //pero me dio err
+Task.find(function (err, tasks){
+        //muestro las tareas que tengo
+        console.log(tasks);
+    });
+    //res.send('Holis'); //respondo con holis
+    res.json({  //en lugar de texto paso un json
+        status: 'API Works!'
+        //en la pag obtenemos esto {"status":"API Works!"}
+        //que es un objeto de javascript
+    });
+});
+
+con el then:
+router.get('/', (req, res) => { //cuando llegue una peticion
+    //consulto a la bd
+Task.find()
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
+});
+
+async await:
+router.get('/', async (req, res) => { //cuando llegue una peticion
+    //consulto a la bd
+    //await indico que me va a tomar tiempo
+    //cuando termine la consulta guardo los datos en tasks
+    const tasks = await Task.find();
+    console.log(tasks);
+    res.json('recivido');
+});
+
+Consola:
+[nodemon] restarting due to changes...
+[nodemon] starting `node src/index.js`
+Server on port 3000
+db conectada
+[]
+GET /api/tasks 200 58.135 ms - 10
+
+si funciona hermano wuhuuu!!
+
+aca el chabon usa un simulador de peticiones cliente
+osea las peticiones que haria el navegador
+explica que despues eso se reemplaza por react
+asique creo que no lo voy a descargar
+
+si hice el codigo que agregó 
+minuto 55
+
+bueno ya hice todo el codigo del crud para la bd
+y si me voy a descargar el simulador jeje
+ahí te cuento como:
+hay que instalar en chrome una extension
+para eso voy a chrome store
+busco postman
+intalo la extensión y también instalo la aplicación para windows
+abro la aplicació, una nueva pestaña
+en headers pongo en key y value lo que me dice el tutorial
+y ya lo puedo usar para las consultas
