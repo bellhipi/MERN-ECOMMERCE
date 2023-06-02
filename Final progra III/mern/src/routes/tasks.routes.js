@@ -45,7 +45,7 @@ router.put('/:id', async (req, res) => {
     //obtengo el titulo y la descripción del cliente
     const { title, description } = req.body;
     //creo una tarea con estos datos
-    const newTask = { title, descrpition };
+    const newTask = { title, description };
     await Task.findByIdAndUpdate(req.params.id, newTask);
     //console.log(req .params.id);
     res.json({ status: 'Tarea actualizada' });
