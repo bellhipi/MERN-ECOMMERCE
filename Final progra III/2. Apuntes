@@ -1,0 +1,56 @@
+https://www.youtube.com/watch?v=204v5QXHlmc&t=15s&ab_channel=Fazt
+
+la carpeta app tiene todo el código del front
+
+para convertir una alerta en algo que pueda interpretar el navegador vamos a intalar la siguiente librería
+
+npm install webpack -D
+
+con el -D lo intalo como dependencia de desarrollo
+
+npm intall webpack-cli -D
+
+esta sirve para que webpack internamente funcione
+
+por fuera de todo creamos un archivo webpack.config.js (tiene que tener ese nombre)
+para darle la configuración a webpack
+
+Agregamos en el package.json un script webpack: "webpack --mode development"
+entonces cuando ejecutamos npm run webpack lo que estamos haciendo es ejecutar por mi el comando webpack --mode development
+
+> mern@1.0.0 webpack
+> webpack --mode development
+
+asset bundle.js 1.23 KiB [emitted] (name: main)
+./src/app/index.js 26 bytes [built] [code generated]
+webpack 5.85.1 compiled successfully in 286 ms
+
+genera un archivo bundle.js en la carpeta public
+dentro de ese archivo nos encontramos con la alerta pero escrito todo raro
+esto es porque webpack se puede complementar de otras herramientas para hacer otro tipo de tareas
+
+Basicament nuestro archivo nos muestra que el código está convertido
+
+Entonces lo que hacemos es llamar al script desde html y luego npm run dev
+y vemos en el localhost:3000
+que no sale nuestro cartel de alerta
+
+vamos a instalar los modulos para que mi computadora entienda react
+react es el modulo principal
+y react-dom es el módulo para el navegador
+npm install react react-dom -D
+con la -D podemos instalarlos como módulos de dependencia del desarrollo
+polque? no hay polque... (minuto 10:39)
+
+hago un render en el index.js de app
+luego hago en la consola un npm run webpack para que se traduzca
+pero webpack puede traducir solo js
+y el código que hicimos es jsx (combinación de js y html)
+
+para poder traducir todo esto necesitamos otro módulo:
+
+npm install babel-core babel-loader babel-preset-react babel-preset-env -D
+
+el babel-loader sirve para que webpack pueda tomar babel y hacerla funcionar internamente
+tambien tenemos que decirle que es lo que debe traducir, esto lo hacemos con los preset
+el preset-env es para decirle que traduzca el código jsx o de java script moderno
