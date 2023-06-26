@@ -54,3 +54,15 @@ npm install babel-core babel-loader babel-preset-react babel-preset-env -D
 el babel-loader sirve para que webpack pueda tomar babel y hacerla funcionar internamente
 tambien tenemos que decirle que es lo que debe traducir, esto lo hacemos con los preset
 el preset-env es para decirle que traduzca el código jsx o de java script moderno
+
+cramos un archivo .babelrc es para decirle a babel que sintaxis es la encargada de traducir
+babel internamente va a buscar este archivo .babelrc, que es un archivo oculto
+y entonces va a decir ok, tengo que traducri toda la sintaxis moderna de js y toda la sintaxis de react
+
+pero pero pero
+todavía no le pedimos a webpack que intente traducir sintaxis moderna
+así que vamos a agregar eso en la config de webpack
+
+luego guardamos y en la consola ponemos npm run webpack
+y ahora en el archivo bundle.js vamos a ver que tenemos mucho más código y más pesado
+eso es porque tenemos internamente aquí react, entonces podemos utilizar la aplicación sin necesidad de llamar a ninguna biblioteca
