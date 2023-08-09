@@ -17,4 +17,4 @@ class App extends Component{
 
 //voy a renderizar este componente
 //es decir que voy a montar el h1 Holita en donde está el id app
-render (<App/>,document.getElementById('app'));
+render (<App/>,document.getElementById('app'))

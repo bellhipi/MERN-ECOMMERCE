@@ -1,5 +1,4 @@
 //indicamos que presets son los que tiene que leer
 {
-    "presets": ["@babel/preset-env", "react"]
+    "presets": ["env", "react"]
 }
-
