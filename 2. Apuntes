@@ -1,0 +1,111 @@
+https://www.youtube.com/watch?v=204v5QXHlmc&t=15s&ab_channel=Fazt
+
+la carpeta app tiene todo el código del front
+
+para convertir una alerta en algo que pueda interpretar el navegador vamos a intalar la siguiente librería
+
+npm install webpack -D
+
+con el -D lo intalo como dependencia de desarrollo
+
+npm intall webpack-cli -D
+
+esta sirve para que webpack internamente funcione
+
+por fuera de todo creamos un archivo webpack.config.js (tiene que tener ese nombre)
+para darle la configuración a webpack
+
+Agregamos en el package.json un script webpack: "webpack --mode development"
+entonces cuando ejecutamos npm run webpack lo que estamos haciendo es ejecutar por mi el comando webpack --mode development
+
+> mern@1.0.0 webpack
+> webpack --mode development
+
+asset bundle.js 1.23 KiB [emitted] (name: main)
+./src/app/index.js 26 bytes [built] [code generated]
+webpack 5.85.1 compiled successfully in 286 ms
+
+genera un archivo bundle.js en la carpeta public
+dentro de ese archivo nos encontramos con la alerta pero escrito todo raro
+esto es porque webpack se puede complementar de otras herramientas para hacer otro tipo de tareas
+
+Basicament nuestro archivo nos muestra que el código está convertido
+
+Entonces lo que hacemos es llamar al script desde html y luego npm run dev
+y vemos en el localhost:3000
+que no sale nuestro cartel de alerta
+
+vamos a instalar los modulos para que mi computadora entienda react
+react es el modulo principal
+y react-dom es el módulo para el navegador
+npm install react react-dom -D
+con la -D podemos instalarlos como módulos de dependencia del desarrollo
+polque? no hay polque... (minuto 10:39)
+
+hago un render en el index.js de app
+luego hago en la consola un npm run webpack para que se traduzca
+pero webpack puede traducir solo js
+y el código que hicimos es jsx (combinación de js y html)
+
+para poder traducir todo esto necesitamos otro módulo:
+
+npm install babel-core babel-loader babel-preset-react babel-preset-env -D
+
+el babel-loader sirve para que webpack pueda tomar babel y hacerla funcionar internamente
+tambien tenemos que decirle que es lo que debe traducir, esto lo hacemos con los preset
+el preset-env es para decirle que traduzca el código jsx o de java script moderno
+
+cramos un archivo .babelrc es para decirle a babel que sintaxis es la encargada de traducir
+babel internamente va a buscar este archivo .babelrc, que es un archivo oculto
+y entonces va a decir ok, tengo que traducri toda la sintaxis moderna de js y toda la sintaxis de react
+
+pero pero pero
+todavía no le pedimos a webpack que intente traducir sintaxis moderna
+así que vamos a agregar eso en la config de webpack
+
+luego guardamos y en la consola ponemos npm run webpack
+
+ERROR:
+> webpack --mode development
+
+node:internal/process/promises:279
+            triggerUncaughtException(err, true /* fromPromise */);
+            ^
+
+Error: Plugin/Preset files are not allowed to export objects, only functions. 
+
+Googleando encontré que el problema del error es una incompatibilidad entre el babel core 6 y babel loader 7
+la siguiente página lo explica muy bien:
+https://www.positioniseverything.net/error-plugin/preset-files-are-not-allowed-to-export-objects-only-functions/
+
+Tal como dice en esa página me fijé las versiones en el package.json:
+
+   "babel-core": "^6.26.3",
+    "babel-loader": "^9.1.2",
+
+Para solucionarlo desinstalé las dependencias que tenía:
+npm uninstall babel-core babel-loader babel-preset-react babel-preset-env -D
+
+https://medium.com/@elisealcala/empieza-un-nuevo-proyecto-react-f3fea6254d1
+npm install @babel/core babel-loader @babel/preset-env @babel/preset-react -D
+
+ahora me quedó estas versiones:
+"devDependencies": {
+    "@babel/core": "^7.22.10",
+    "@babel/preset-env": "^7.22.10",
+    "@babel/preset-react": "^7.22.5",
+    "babel-loader": "^9.1.3",
+    "nodemon": "^2.0.22",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "webpack": "^5.85.1",
+    "webpack-cli": "^5.1.3"
+  }
+  
+Y en el archivo .babelrc escribimos:
+{
+    "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+
+y ahora en el archivo bundle.js vamos a ver que tenemos mucho más código y más pesado
+eso es porque tenemos internamente aquí react, entonces podemos utilizar la aplicación sin necesidad de llamar a ninguna biblioteca
