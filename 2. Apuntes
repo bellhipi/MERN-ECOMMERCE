@@ -109,3 +109,73 @@ Y en el archivo .babelrc escribimos:
 
 y ahora en el archivo bundle.js vamos a ver que tenemos mucho más código y más pesado
 eso es porque tenemos internamente aquí react, entonces podemos utilizar la aplicación sin necesidad de llamar a ninguna biblioteca
+
+Ok, ahora vuelvo a conectar la bd como se explica en el apunte 1, luego ejecuto npm run dev
+abro otra terminal, y en el package.json agrego --watch en el script de webpack
+en la nueva  terminal ejecuto npm run webpack y debería aparecer una leyenda en la ejecución que dice
+webpack is watching the files...
+A MI NO ME APARECE
+Pero parece que igual funciona porque la idea es que eso hace que no corte la traducción
+sino que si modifico el index.js y refresco la página me hace la traducción en tiempo de ejecución
+
+Ya termine con todo esto ahora vamos al fornt
+voy a crar un archivo App.js en la carpeta app y pasarle lo que tiene index.js
+de esta forma lo voy a usar como componenete
+
+Ahora vamos a modificar App.js
+Como react puede montar solamente un componenete a la vez
+vamos a cambiar el h1 y colocar un div
+
+bueno, ahora se viene algo interesante
+voy a aprender a usar frameworks? puede ser.. no se sabe...
+spoiler: sí
+en lugar de ponernos a usar un css de cero vamos a usar un framework
+https://materializecss.com/
+lo traemos a través del CDN
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+
+uno es para el css y otro para el javascript
+el css es para estilizar la aplicación
+y el javascript me va a dar el uso de barras laterales etc..
+asi que vamos a copiar los dos
+el css lo pegamos en el index.html debajo del titulo
+el javascript lo pegamos en el index.html antes del bundle
+
+ahora vamos a agregar lo iconos buscando icons en la misma página
+https://materializecss.com/icons.html
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+Los pego despues del css
+
+Seguimos con el front en App.js, creamos un botón send
+cuando apretamos ese botón vemos que se refresca la página con la siguiente url
+http://localhost:3000/?
+Pero no quiero eso sino que quiero recibir los datos del formulario, para eso voy a crear un evento...
+Una vez que obtuve los datos ahora quiero enviarlos:
+No necesito poner todo el url porque mi aplicación de react esta servida por el mismo servidor
+fetch('/api/tasks', {
+            //a traves de este metodo envío la petición
+            method: 'POST',
+            //stringify es para convertir a string
+            body: JSON.stringify(this.state),
+            //objeto con el tipo de contenido que le voy a enviar
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            //muestro por consola lo que retorna
+            .then(res => console.log(res))
+            //captura el error y muestra por consola
+            .catch(err => console.error(err));
+
+con f12 veo response y una url si la copio y pego se ve lo que se da de alta en la bd
+en el servidor habiamos creado un mensaje que decía tarea guardada, asi que ahora quiero ver ese mensaje
+tengo que convertir la respuesta en formato json
