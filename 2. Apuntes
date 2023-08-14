@@ -179,3 +179,18 @@ fetch('/api/tasks', {
 con f12 veo response y una url si la copio y pego se ve lo que se da de alta en la bd
 en el servidor habiamos creado un mensaje que decía tarea guardada, asi que ahora quiero ver ese mensaje
 tengo que convertir la respuesta en formato json
+ahora veo en el f12 que dice tarea guardada pero quiero que ese mensaje me aparezca en una ventana
+con el js que copiamos del framework materialize, esto trae una funcion que nos permite hacer lo que queremos
+esa ventana se llama toast
+M es una variable global que nos da materialize
+M.toast()
+
+cramos una funcion que cuando se ejecute llamará a fetchTasks y trae la info que hay en la bd
+también mostramos el mensaje de que fue guardado en la bd ese registro
+con f12 ahora vemos un array con todos los componentes de la bd y cuando enviamos nos dice tarea guardada
+
+Agrego una tabla, agrego un array de tareas en el constructor
+obtener tareas se encarga de completar el array (fetchTasks)
+agrego código jsx en el medio de la tabla de html para poder mostrar en la tablo los datos de la bd
+cuando hago f12 se ven las tareas en la tabla y me va a salir un warning que dice que cada elemento del array debe tener la propiedad key
+agregamos esa propidedad en el tr del return

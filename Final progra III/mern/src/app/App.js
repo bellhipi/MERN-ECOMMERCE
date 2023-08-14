@@ -9,7 +9,8 @@ class App extends Component{
         this.state = {
             //en principio los datos están en blanco
             title: '',
-            description: ''
+            description: '',
+            tasks: []
         };
         //Vinculo los métodos 
         this.addTask = this.addTask.bind(this);
@@ -34,12 +35,37 @@ class App extends Component{
             //muestro por consola lo que retorna
             //.then(res => console.log(res))
             //combierto la respuesta en formato json y lo muestro por consola
-            .then(res => console.log(res.json))
-            .then(data => console.log(data))
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                //muestro un mensaje
+                M.toast({html: 'Tarea guardada'});
+                //limpiamos y volvemos a poner en blanco el titulo y la desc
+                this.setState({title: '', description: ''});
+            })
             //captura el error y muestra por consola
             .catch(err => console.error(err));
         //esto evita que la página refreshee cuando apreto el send
         e.preventDefault();
+    }
+
+    //cuando la aplicación cargue se ejecutará este método
+    componentDidMount(){
+        //console.log('componente fue montado')
+        this.fetchTasks();
+    }
+
+    //metodo para obtener tareas
+    fetchTasks(){
+        //consulta al servidor de tipo get
+        //no es necesario agregar una configuración ya que por ser un fetch por defecto hace un get
+        fetch('/api/tasks')
+            .then(res => res.json())
+            .then(data => {
+                //console.log(data);
+                this.setState({tasks: data});
+                console.log(this.state.tasks);
+            });
     }
 
     //evento para capturar los datos
@@ -81,13 +107,13 @@ class App extends Component{
                                         <div className="row">
                                             {/* Estilo del imput */}
                                             <div className="input-field col s12">
-                                                <input name="title" onChange={this.handleChange} type="text" placeholder="Task Title"/>
+                                                <input name="title" onChange={this.handleChange} type="text" placeholder="Task Title" value={this.state.title}/>
                                             </div>
                                         </div>
                                         <div className="row">
                                             {/* Estilo del imput */}
                                             <div className="input-field col s12">
-                                                <textarea name="description" onChange={this.handleChange} placeholder="Task Description" className="materialize"></textarea>
+                                                <textarea name="description" onChange={this.handleChange} placeholder="Task Description" className="materialize-textarea" value={this.state.description}></textarea>
                                             </div>
                                         </div>
                                         {/* Boton tipo submit para que dispare el evento del formulario */}
@@ -99,7 +125,36 @@ class App extends Component{
                             </div>
                         </div>
                         <div className="col s7">
-
+                            {/* Tabla */}
+                            <table>
+                                {/* Encabezado de la tabla */}
+                                <thead>
+                                    {/* Una fila */}
+                                    <tr>
+                                        {/* Múltiples cabeceras */}
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                {/* Cuerpo de la tabla */}
+                                <tbody>
+                                    {/* Código en Java Script */}
+                                    {
+                                        //quiero recorrer las tareas
+                                        this.state.tasks.map(task => {
+                                            //por cada tarea por la que paso retorno
+                                            return (
+                                                //una fila de la tabla
+                                                <tr key={task._id}>
+                                                    {/*por cada fila creamos un elemento que utiliza la tarea que estoy recorriendo*/}
+                                                    <td>{task.title}</td>
+                                                    <td>{task.description}</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
