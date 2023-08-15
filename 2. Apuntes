@@ -110,6 +110,10 @@ Y en el archivo .babelrc escribimos:
 y ahora en el archivo bundle.js vamos a ver que tenemos mucho más código y más pesado
 eso es porque tenemos internamente aquí react, entonces podemos utilizar la aplicación sin necesidad de llamar a ninguna biblioteca
 
+f12
+warning:
+react-dom.development.js:86 Warning: ReactDOM.render is no longer supported in React 18. Use createRoot instead. Until you switch to the new API, your app will behave as if it's running React 17. Learn more: https://reactjs.org/link/switch-to-createroot
+
 Ok, ahora vuelvo a conectar la bd como se explica en el apunte 1, luego ejecuto npm run dev
 abro otra terminal, y en el package.json agrego --watch en el script de webpack
 en la nueva  terminal ejecuto npm run webpack y debería aparecer una leyenda en la ejecución que dice
@@ -176,6 +180,7 @@ fetch('/api/tasks', {
             //captura el error y muestra por consola
             .catch(err => console.error(err));
 
+
 con f12 veo response y una url si la copio y pego se ve lo que se da de alta en la bd
 en el servidor habiamos creado un mensaje que decía tarea guardada, asi que ahora quiero ver ese mensaje
 tengo que convertir la respuesta en formato json
@@ -193,4 +198,16 @@ Agrego una tabla, agrego un array de tareas en el constructor
 obtener tareas se encarga de completar el array (fetchTasks)
 agrego código jsx en el medio de la tabla de html para poder mostrar en la tablo los datos de la bd
 cuando hago f12 se ven las tareas en la tabla y me va a salir un warning que dice que cada elemento del array debe tener la propiedad key
-agregamos esa propidedad en el tr del return
+agregamos esa propidedad en el tr del return usando _id que es el id propio de mongo
+
+ahora si nosotros agregamos una tarea se guarda en la bd pero no se muestra en la tabla la tarea nueva
+esto es porque no sabe que cambió entonces voy a hacer que al apretar el botón se actualice la tabla
+
+ahora vamos por los botones de actulizar y eliminar
+hacemos el método para eliminar las tareas
+vamos a hacer el método para editar, para esto vamos a reutilizar el formulario
+vamos a hacer una consulta de solo ese elemento a la bd, esto no es necesario hacerlo de esta forma
+pero es para aprender a hacer consultas de un solo elemento
+cuando hago el metodo de actualizar agrego el atributo _id vacío en el constructor
+y dentro de la funcion se actualiza tambien el _id
+esto es para que cuando apreto send verifique si el id esta vacío, si está vacío da de alta, sino actualiza

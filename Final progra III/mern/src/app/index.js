@@ -7,6 +7,7 @@ import React from 'react';
 import { render } from 'react-dom'; //importo render directamente
 //esta facilidad se llama restrucsturing y se puede hacer gracias a las nuevas versiones de js
 
+
 //class App extends Component{
     //utilizo el metodo render
 //    render() {
