@@ -31,7 +31,12 @@ class App extends Component {
                 }
             })
             .then(res => res.json())
-            .then(data => console.log(data));
+            .then(data => {
+                console.log(data);
+                M.toast({html: 'Tarea actualizada'});
+                this.setState({title: '', description: '', _id: ''});
+                this.fetchTasks();
+            });
         } else {
             //console.log("adding task");
             //console.log(this.state);
