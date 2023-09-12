@@ -1,0 +1,6 @@
+<p>"Legajo del primer alumno:" + {alumnos[0].legajo}</p>
+                <p>"Legajo del primer alumno:" + {alumnos[1].legajo}</p>
+                {//console.log(alumnos.map(alu => alu.legajo))}
+                {//alumnos.map(alu => <p>"Legajo del primer alumno:" + {alu[0].legajo}</p>)}
+                {//alumnos.map(alu => <p>{`Legajo ${alu.legajo}, Nombre: ${alu.nombre}`}</p>)}
+                {//alumnos.map(alu => <Alumno legajo={alu.legajo}/>)}
